@@ -10,7 +10,47 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Text('안녕')
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('드론 문제풀이')
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              FractionallySizedBox(
+                widthFactor: 0.5,
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.blue),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Text('드론 기초'),
+                ),
+              ),
+              Text('항공기상'),
+              Text('항공법규'),
+              Text('항공역학'),
+            ]
+          )
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: SizedBox(
+            height: 50,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text('퀴즈풀이'),
+                  Text('기출문제'),
+                  Text('구술평가'),
+                ]
+            ),
+          )
+        ),
+      )
     );
   }
 }
