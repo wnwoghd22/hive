@@ -24,13 +24,19 @@ class MyApp extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blue),
+                    border: Border.all(color: Colors.blueAccent),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Text('드론 기초'),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text('드론 기초'),
+                  ),
                 ),
               ),
-              Text('항공기상'),
+              ElevatedButton(
+                  onPressed: () {},
+                  child: Text('항공기상'),
+              ),
               Text('항공법규'),
               Text('항공역학'),
             ]
