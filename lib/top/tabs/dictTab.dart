@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DictPage extends StatelessWidget {
-  const DictPage({Key? key}) : super(key: key);
+class DictTab extends StatelessWidget {
+  const DictTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

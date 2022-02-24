@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:hive/body/pages/dictPage.dart';
-import 'package:hive/body/pages/examPage.dart';
-import 'package:hive/body/pages/quizPage.dart';
+import 'package:hive/top/tabs/dictTab.dart';
+import 'package:hive/top/tabs/examTab.dart';
+import 'package:hive/top/tabs/quizTab.dart';
 
-class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+class TopPage extends StatefulWidget {
+  const TopPage({Key? key}) : super(key: key);
 
   @override
-  _BodyState createState() => _BodyState();
+  _TopPageState createState() => _TopPageState();
 }
 
-class _BodyState extends State<Body> {
+class _TopPageState extends State<TopPage> {
   late List<Widget> _pages;
   late Widget _page1;
   late Widget _page2;
@@ -21,14 +21,10 @@ class _BodyState extends State<Body> {
   @override
   void initState() {
     super.initState();
-    _page1 = const QuizPage();
-    _page2 = const ExamPage();
-    _page3 = const DictPage();
-    _pages = [
-      _page1,
-      _page2,
-      _page3
-    ];
+    _page1 = const QuizTab();
+    _page2 = const ExamTab();
+    _page3 = const DictTab();
+    _pages = [ _page1, _page2, _page3 ];
     _currentIndex = 0;
     _currentPage = _page1;
   }
@@ -61,7 +57,8 @@ class _BodyState extends State<Body> {
             BottomNavigationBarItem(
               icon: Icon(Icons.assignment),
               label: '기출문제'
-            ),BottomNavigationBarItem(
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.announcement),
               label: '구술평가'
             ),

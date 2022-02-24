@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hive/quiz/page.dart';
 
-class QuizPage extends StatelessWidget {
-  const QuizPage({Key? key}) : super(key: key);
+class QuizTab extends StatelessWidget {
+  const QuizTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,12 @@ class QuizPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => QuizPage())
+                    );
+                  },
                   child: Text('드론 기초'),
                 ),
               ),
