@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 enum QuizType {
   choice,
   multiChoice,
@@ -26,7 +28,7 @@ class QuizChoice extends Quiz {
 }
 
 class QuizMultiChoice extends Quiz {
-  final List<int> answer;
+  final List<bool> answer;
   final int length;
   final List<String> options;
 
@@ -49,9 +51,11 @@ class QuizOX extends Quiz {
 
 class QuizShort extends Quiz {
   final String answer;
+  final TextInputType inputType;
 
   const QuizShort(
     String description,
-    this.answer
+    this.answer,
+    this.inputType
   ) : super(QuizType.shortAnswer, description);
 }

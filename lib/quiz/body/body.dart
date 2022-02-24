@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hive/quiz/body/form/choice.dart';
 import 'package:hive/quiz/body/form/interface/form.dart';
+import 'package:hive/quiz/body/form/multiChoice.dart';
 import 'package:hive/quiz/body/form/ox.dart';
+import 'package:hive/quiz/body/form/shortAnswer.dart';
 import 'package:hive/quiz/data/data.dart';
 import 'package:hive/quiz/data/quiz.dart';
+import 'package:hive/components/wideButton.dart';
 
 class QuizBody extends StatefulWidget {
-  const QuizBody({Key? key}) : super(key: key);
+  final int chapter;
+
+  const QuizBody({
+    Key? key,
+    required this.chapter
+  }) : super(key: key);
 
   @override
   _QuizBodyState createState() => _QuizBodyState();
@@ -36,8 +44,12 @@ class _QuizBodyState extends State<QuizBody> {
         );
         break;
       case QuizType.multiChoice:
-          q as QuizMultiChoice;
-
+        _form = MultiChoiceForm(
+            description: (q as QuizMultiChoice).description,
+            answer: q.answer,
+            length: q.length,
+            options: q.options
+        );
         break;
       case QuizType.ox:
         _form = OXForm(
@@ -46,7 +58,11 @@ class _QuizBodyState extends State<QuizBody> {
         );
         break;
       case QuizType.shortAnswer:
-        // TODO: Handle this case.
+        _form = ShortAnswerForm(
+            description:  (q as QuizShort).description,
+            answer: q.answer,
+            inputType: q.inputType
+        );
         break;
     }
     _quizForm = _form as QuizForm;
@@ -55,6 +71,19 @@ class _QuizBodyState extends State<QuizBody> {
   void check() {
     setState(() {
       _resultText = _quizForm.check() ? Text('O') : Text('X');
+      if (_currentNum + 1 == quizList.length)
+        _checkButton = Text('모두 풀었습니다.');
+      else
+        _checkButton = wideButton('다음 문제', nextQuestion);
+    });
+  }
+
+  void nextQuestion() {
+    setState(() {
+      _currentNum++;
+      setQuizForm(quizList[_currentNum]);
+      _resultText = Text('선택하세요');
+      _checkButton = wideButton('확인', check);
     });
   }
 
@@ -62,7 +91,7 @@ class _QuizBodyState extends State<QuizBody> {
   void initState() {
     super.initState();
 
-    for (Quiz q in QuizData.data) {
+    for (Quiz q in QuizData.data[widget.chapter]) {
       quizList.add(q);
     }
 
@@ -70,7 +99,7 @@ class _QuizBodyState extends State<QuizBody> {
     
     _resultText = Text('선택하세요');
 
-    _checkButton = ElevatedButton(onPressed: check, child: Text('확인'));
+    _checkButton = wideButton('확인', check);
   }
 
   @override
@@ -80,7 +109,7 @@ class _QuizBodyState extends State<QuizBody> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(_currentNum.toString() + '/' + _maxNum.toString()),
+            Text((_currentNum + 1).toString() + '/' + _maxNum.toString()),
             _resultText,
             _form,
             _checkButton

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive/top/components/wideButton.dart';
+import 'package:hive/components/wideButton.dart';
 
 class DictTab extends StatelessWidget {
   const DictTab({Key? key}) : super(key: key);

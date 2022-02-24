@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hive/quiz/body/body.dart';
 
 class QuizPage extends StatelessWidget {
-  const QuizPage({Key? key}) : super(key: key);
+  final int chapter;
+
+  const QuizPage({
+    Key? key,
+    required this.chapter
+  }) : super(key: key);
 
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +19,7 @@ class QuizPage extends StatelessWidget {
             onPressed: () => Navigator.pop(context, false),
           ),
         ),
-        body: QuizBody(),
+        body: QuizBody(chapter: chapter),
         bottomNavigationBar: BottomAppBar(),
       )
     );
