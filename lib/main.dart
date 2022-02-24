@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'body.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -52,6 +54,7 @@ class MyApp extends StatelessWidget {
                   Text('퀴즈풀이'),
                   Text('기출문제'),
                   Text('구술평가'),
+                  Body()
                 ]
             ),
           )
