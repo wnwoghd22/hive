@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/top/components/wideButton.dart';
 
 class DictTab extends StatelessWidget {
   const DictTab({Key? key}) : super(key: key);
@@ -11,20 +12,7 @@ class DictTab extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            FractionallySizedBox(
-              widthFactor: 0.5,
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blueAccent),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text('구술평가'),
-                ),
-              ),
-            ),
+            wideButton('구술평가', () {})
           ]
         )
       )
