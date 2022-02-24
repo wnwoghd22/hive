@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/quiz/body/form/choice.dart';
 import 'package:hive/quiz/body/form/form.dart';
@@ -27,11 +28,16 @@ class _QuizBodyState extends State<QuizBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(_currentNum.toString() + '/' + _maxNum.toString()),
-        _form
-      ],
+    return Center(
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(_currentNum.toString() + '/' + _maxNum.toString()),
+            _form
+          ],
+        ),
+      ),
     );
   }
 }
