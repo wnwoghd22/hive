@@ -1,31 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:hive/quiz/body/form/interface/form.dart';
 
-class ChoiceForm extends StatefulWidget implements QuizForm {
+class OXForm extends StatefulWidget implements QuizForm {
   int checkValue = -1;
   final String description;
-  final int answer;
-  final int length;
-  final List<String> options;
+  final bool answer;
+  final List<String> options = [ 'O', 'X' ];
 
   @override
   bool check() {
-    return checkValue == (answer - 1);
+    if (checkValue == -1) // unchecked
+      return false;
+
+    bool result = checkValue == 0 ? true : false;
+
+    return result == answer;
   }
 
-  ChoiceForm({
+  OXForm({
     Key? key,
     required this.description,
     required this.answer,
-    required this.length,
-    required this.options
   }) : super(key: key);
 
   @override
-  _ChoiceFormState createState() => _ChoiceFormState();
+  _OXFormState createState() => _OXFormState();
 }
 
-class _ChoiceFormState extends State<ChoiceForm> {
+class _OXFormState extends State<OXForm> {
   int _choice = -1;
 
   @override
@@ -41,7 +43,7 @@ class _ChoiceFormState extends State<ChoiceForm> {
           Text(widget.description),
           Column(
             children: <Widget>[
-              for (int i = 0; i < widget.length; ++i)
+              for (int i = 0; i < 2; ++i)
                 choiceRadioTile(i)
             ],
           ),
