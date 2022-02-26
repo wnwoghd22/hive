@@ -109,6 +109,7 @@ class _QuizBodyState extends State<QuizBody> {
           children: [
             Text((_currentNum + 1).toString() + '/' + _maxNum.toString()),
             _resultText,
+            //TODO: using PageView instead
             _quizForm,
             _checkButton
           ],
