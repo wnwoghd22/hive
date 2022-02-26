@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/quiz/body/form/interface/form.dart';
 
-class MultiChoiceForm extends StatefulWidget implements QuizForm {
+class MultiChoiceForm extends QuizForm {
   List<bool> checked = [];
   final String description;
   final List<bool> answer;
@@ -32,7 +32,7 @@ class MultiChoiceForm extends StatefulWidget implements QuizForm {
   _MultiChoiceFormState createState() => _MultiChoiceFormState();
 }
 
-class _MultiChoiceFormState extends State<MultiChoiceForm> {
+class _MultiChoiceFormState extends QuizFormState<MultiChoiceForm> {
   @override
   void initState() {
     super.initState();

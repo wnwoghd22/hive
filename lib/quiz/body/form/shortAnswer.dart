@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/quiz/body/form/interface/form.dart';
 
-class ShortAnswerForm extends StatefulWidget implements QuizForm {
+class ShortAnswerForm extends QuizForm {
   String input = '';
   final String description;
   final String answer;
@@ -23,7 +23,7 @@ class ShortAnswerForm extends StatefulWidget implements QuizForm {
   _ShortAnswerFormState createState() => _ShortAnswerFormState();
 }
 
-class _ShortAnswerFormState extends State<ShortAnswerForm> {
+class _ShortAnswerFormState extends QuizFormState<ShortAnswerForm> {
   final TextEditingController _controller = TextEditingController();
 
   @override

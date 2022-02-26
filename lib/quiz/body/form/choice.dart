@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/quiz/body/form/interface/form.dart';
 
-class ChoiceForm extends StatefulWidget implements QuizForm {
+class ChoiceForm extends QuizForm {
   int checkValue = -1;
   final String description;
   final int answer;
@@ -25,7 +25,7 @@ class ChoiceForm extends StatefulWidget implements QuizForm {
   _ChoiceFormState createState() => _ChoiceFormState();
 }
 
-class _ChoiceFormState extends State<ChoiceForm> {
+class _ChoiceFormState extends QuizFormState<ChoiceForm> {
   int _choice = -1;
 
   @override

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/quiz/body/form/interface/form.dart';
 
-class OXForm extends StatefulWidget implements QuizForm {
+class OXForm extends QuizForm {
   int checkValue = -1;
   final String description;
   final bool answer;
@@ -9,8 +9,9 @@ class OXForm extends StatefulWidget implements QuizForm {
 
   @override
   bool check() {
-    if (checkValue == -1) // unchecked
+    if (checkValue == -1) {
       return false;
+    }
 
     bool result = checkValue == 0 ? true : false;
 
@@ -27,7 +28,7 @@ class OXForm extends StatefulWidget implements QuizForm {
   _OXFormState createState() => _OXFormState();
 }
 
-class _OXFormState extends State<OXForm> {
+class _OXFormState extends QuizFormState<OXForm> {
   int _choice = -1;
 
   @override

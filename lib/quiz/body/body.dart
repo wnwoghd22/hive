@@ -25,7 +25,6 @@ class _QuizBodyState extends State<QuizBody> {
   late int _currentNum = 0;
   late int _correctAnswers = 0;
 
-  late Widget _form;
   late QuizForm _quizForm;
   
   late Widget _resultText;
@@ -36,7 +35,7 @@ class _QuizBodyState extends State<QuizBody> {
   void setQuizForm(Quiz q) {
     switch(q.type) {
       case QuizType.choice:
-        _form = ChoiceForm(
+        _quizForm = ChoiceForm(
           description: (q as QuizChoice).description,
           answer: q.answer,
           length: q.length,
@@ -44,7 +43,7 @@ class _QuizBodyState extends State<QuizBody> {
         );
         break;
       case QuizType.multiChoice:
-        _form = MultiChoiceForm(
+        _quizForm = MultiChoiceForm(
             description: (q as QuizMultiChoice).description,
             answer: q.answer,
             length: q.length,
@@ -52,20 +51,19 @@ class _QuizBodyState extends State<QuizBody> {
         );
         break;
       case QuizType.ox:
-        _form = OXForm(
+        _quizForm = OXForm(
           description: (q as QuizOX).description,
           answer: q.answer
         );
         break;
       case QuizType.shortAnswer:
-        _form = ShortAnswerForm(
+        _quizForm = ShortAnswerForm(
             description:  (q as QuizShort).description,
             answer: q.answer,
             inputType: q.inputType
         );
         break;
     }
-    _quizForm = _form as QuizForm;
   }
 
   void check() {
@@ -111,7 +109,7 @@ class _QuizBodyState extends State<QuizBody> {
           children: [
             Text((_currentNum + 1).toString() + '/' + _maxNum.toString()),
             _resultText,
-            _form,
+            _quizForm,
             _checkButton
           ],
         ),
