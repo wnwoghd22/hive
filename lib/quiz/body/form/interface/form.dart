@@ -5,9 +5,32 @@ abstract class IQuiz {
 }
 
 abstract class QuizForm extends StatefulWidget implements IQuiz {
-  const QuizForm({Key? key}) : super(key: key);
+  final String description;
+
+  const QuizForm({
+    Key? key,
+    required this.description
+  }) : super(key: key);
 }
 
 abstract class QuizFormState<T extends QuizForm> extends State<T> {
+  Widget buildInput();
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          const SizedBox(height: 32),
+          Text(
+            widget.description,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold
+            )
+          ),
+          buildInput()
+        ],
+      ),
+    );
+  }
 }

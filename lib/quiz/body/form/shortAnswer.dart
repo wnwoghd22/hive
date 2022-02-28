@@ -3,7 +3,6 @@ import 'package:hive/quiz/body/form/interface/form.dart';
 
 class ShortAnswerForm extends QuizForm {
   String input = '';
-  final String description;
   final String answer;
   final TextInputType inputType;
 
@@ -14,10 +13,10 @@ class ShortAnswerForm extends QuizForm {
 
   ShortAnswerForm({
     Key? key,
-    required this.description,
+    required String description,
     required this.answer,
     required this.inputType,
-  }) : super(key: key);
+  }) : super(key: key, description: description);
 
   @override
   _ShortAnswerFormState createState() => _ShortAnswerFormState();
@@ -32,20 +31,13 @@ class _ShortAnswerFormState extends QuizFormState<ShortAnswerForm> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Text(widget.description),
-          TextField(
-            controller: _controller,
-            keyboardType: widget.inputType,
-            onChanged: (value) {
-              widget.input = value;
-            },
-          )
-        ],
-      ),
+  Widget buildInput() {
+    return TextField(
+      controller: _controller,
+      keyboardType: widget.inputType,
+      onChanged: (value) {
+        widget.input = value;
+      },
     );
   }
 }

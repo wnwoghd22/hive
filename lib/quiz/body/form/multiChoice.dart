@@ -4,7 +4,6 @@ import 'package:hive/quiz/body/form/interface/form.dart';
 
 class MultiChoiceForm extends QuizForm {
   List<bool> checked = [];
-  final String description;
   final List<bool> answer;
   final int length;
   final List<String> options;
@@ -16,11 +15,11 @@ class MultiChoiceForm extends QuizForm {
 
   MultiChoiceForm({
     Key? key,
-    required this.description,
+    required String description,
     required this.answer,
     required this.length,
     required this.options
-  }) : super(key: key) {
+  }) : super(key: key, description: description) {
     int i = length;
 
     while (i-- > 0) {
@@ -39,19 +38,12 @@ class _MultiChoiceFormState extends QuizFormState<MultiChoiceForm> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Text(widget.description),
-          Column(
-            children: <Widget>[
-              for (int i = 0; i < widget.length; ++i)
-                choiceCheckTile(i)
-            ],
-          ),
-        ],
-      ),
+  Widget buildInput() {
+    return Column(
+      children: <Widget>[
+        for (int i = 0; i < widget.length; ++i)
+          choiceCheckTile(i)
+      ],
     );
   }
 

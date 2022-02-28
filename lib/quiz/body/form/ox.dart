@@ -3,7 +3,6 @@ import 'package:hive/quiz/body/form/interface/form.dart';
 
 class OXForm extends QuizForm {
   int checkValue = -1;
-  final String description;
   final bool answer;
   final List<String> options = [ 'O', 'X' ];
 
@@ -20,9 +19,9 @@ class OXForm extends QuizForm {
 
   OXForm({
     Key? key,
-    required this.description,
+    required String description,
     required this.answer,
-  }) : super(key: key);
+  }) : super(key: key, description: description);
 
   @override
   _OXFormState createState() => _OXFormState();
@@ -37,19 +36,12 @@ class _OXFormState extends QuizFormState<OXForm> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Text(widget.description),
-          Column(
-            children: <Widget>[
-              for (int i = 0; i < 2; ++i)
-                choiceRadioTile(i)
-            ],
-          ),
-        ],
-      ),
+  Widget buildInput() {
+    return Column(
+      children: <Widget>[
+        for (int i = 0; i < 2; ++i)
+          choiceRadioTile(i)
+      ],
     );
   }
 

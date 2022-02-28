@@ -3,7 +3,6 @@ import 'package:hive/quiz/body/form/interface/form.dart';
 
 class ChoiceForm extends QuizForm {
   int checkValue = -1;
-  final String description;
   final int answer;
   final int length;
   final List<String> options;
@@ -15,11 +14,11 @@ class ChoiceForm extends QuizForm {
 
   ChoiceForm({
     Key? key,
-    required this.description,
+    required String description,
     required this.answer,
     required this.length,
     required this.options
-  }) : super(key: key);
+  }) : super(key: key, description: description);
 
   @override
   _ChoiceFormState createState() => _ChoiceFormState();
@@ -34,19 +33,12 @@ class _ChoiceFormState extends QuizFormState<ChoiceForm> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Text(widget.description),
-          Column(
-            children: <Widget>[
-              for (int i = 0; i < widget.length; ++i)
-                choiceRadioTile(i)
-            ],
-          ),
-        ],
-      ),
+  Widget buildInput() {
+    return Column(
+      children: <Widget>[
+        for (int i = 0; i < widget.length; ++i)
+          choiceRadioTile(i)
+      ],
     );
   }
 
