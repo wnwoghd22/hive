@@ -6,15 +6,20 @@ abstract class IQuiz {
 
 abstract class QuizForm extends StatefulWidget implements IQuiz {
   final String description;
+  final Function? onChanged;
 
   const QuizForm({
     Key? key,
-    required this.description
+    required this.description,
+    this.onChanged
   }) : super(key: key);
 }
 
-abstract class QuizFormState<T extends QuizForm> extends State<T> {
+abstract class QuizFormState<T extends QuizForm> extends State<T> with AutomaticKeepAliveClientMixin {
   Widget buildInput();
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,10 @@ import 'package:hive/components/wideButton.dart';
 class ExamBody extends StatefulWidget {
   final int chapter;
 
-  const ExamBody({
+  int score = 0;
+  int numOfQuestions = 0;
+
+  ExamBody({
     Key? key,
     required this.chapter
   }) : super(key: key);
@@ -21,18 +24,22 @@ class ExamBody extends StatefulWidget {
 }
 
 class _ExamBodyState extends State<ExamBody> {
-  final int _maxNum = 20;
-  late int _currentNum = 0;
-  late int _correctAnswers = 0;
-
-  late QuizForm _quizForm;
-
-  late Widget _resultText;
-  late Widget _checkButton;
-
   final List<Quiz> quizList = [];
+  List<QuizForm> quizWidgets = [];
 
-  Widget buildQuizForm(Quiz q, int index) {
+  void onChanged() {
+    int score = 0;
+
+    for (QuizForm q in quizWidgets) {
+      if (q.check()) {
+        ++score;
+      }
+    }
+
+    widget.score = score;
+  }
+
+  QuizForm buildQuizForm(Quiz q, int index) {
     switch(q.type) {
       case QuizType.choice:
          return ChoiceForm(
@@ -40,24 +47,28 @@ class _ExamBodyState extends State<ExamBody> {
           answer: q.answer,
           length: q.length,
           options: q.options,
+          onChanged: onChanged
         );
       case QuizType.multiChoice:
         return MultiChoiceForm(
             description: index.toString() + '. ' + (q as QuizMultiChoice).description,
             answer: q.answer,
             length: q.length,
-            options: q.options
+            options: q.options,
+            onChanged: onChanged
         );
       case QuizType.ox:
         return OXForm(
             description: index.toString() + '. ' +  (q as QuizOX).description,
-            answer: q.answer
+            answer: q.answer,
+            onChanged: onChanged
         );
       case QuizType.shortAnswer:
         return ShortAnswerForm(
             description: index.toString() + '. ' + (q as QuizShort).description,
             answer: q.answer,
-            inputType: q.inputType
+            inputType: q.inputType,
+            onChanged: onChanged
         );
     }
   }
@@ -66,6 +77,7 @@ class _ExamBodyState extends State<ExamBody> {
   void initState() {
     super.initState();
 
+    widget.numOfQuestions = QuizData.data[widget.chapter].length;
     for (Quiz q in QuizData.data[widget.chapter]) {
       quizList.add(q);
     }
@@ -73,12 +85,24 @@ class _ExamBodyState extends State<ExamBody> {
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
+    // return PageView.builder(
+    //   controller: PageController(initialPage: 0),
+    //   itemCount: quizList.length,
+    //   itemBuilder: (BuildContext context, int index) {
+    //     quizWidgets.add(buildQuizForm(quizList[index], index));
+    //     return quizWidgets[index];
+    //   }
+    // );
+
+    int index = 0;
+    quizWidgets = [
+      for (Quiz q in quizList)
+        buildQuizForm(q, index++)
+    ];
+    
+    return PageView(
       controller: PageController(initialPage: 0),
-      itemCount: quizList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return buildQuizForm(quizList[index], index);
-      }
+      children: quizWidgets,
     );
   }
 }

@@ -12,6 +12,8 @@ class ExamPage extends StatelessWidget {
   }) : super(key: key);
 
   Widget build(BuildContext context) {
+    ExamBody _body = ExamBody(chapter: chapter);
+
     return MaterialApp(
         home: Scaffold(
           appBar: AppBar(
@@ -24,13 +26,13 @@ class ExamPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // TODO: get score and number of questions from child
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ResultPage(score: 1, numOfQuestions: 3)));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ResultPage(score: _body.score, numOfQuestions: _body.numOfQuestions)));
                 },
                 child: const Text('제출'),
               )
             ]
           ),
-          body: ExamBody(chapter: chapter),
+          body: _body,
           bottomNavigationBar: BottomAppBar(),
         )
     );

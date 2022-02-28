@@ -21,7 +21,8 @@ class OXForm extends QuizForm {
     Key? key,
     required String description,
     required this.answer,
-  }) : super(key: key, description: description);
+    Function? onChanged
+  }) : super(key: key, description: description, onChanged: onChanged);
 
   @override
   _OXFormState createState() => _OXFormState();
@@ -52,6 +53,9 @@ class _OXFormState extends QuizFormState<OXForm> {
       onChanged: (val) => setState(() {
         _choice = val;
         widget.checkValue = _choice;
+        if (widget.onChanged != null) {
+          widget.onChanged!();
+        }
       }),
       title: Text(widget.options[i]),
     );

@@ -17,8 +17,9 @@ class ChoiceForm extends QuizForm {
     required String description,
     required this.answer,
     required this.length,
-    required this.options
-  }) : super(key: key, description: description);
+    required this.options,
+    Function? onChanged
+  }) : super(key: key, description: description, onChanged: onChanged);
 
   @override
   _ChoiceFormState createState() => _ChoiceFormState();
@@ -49,6 +50,9 @@ class _ChoiceFormState extends QuizFormState<ChoiceForm> {
       onChanged: (val) => setState(() {
         _choice = val;
         widget.checkValue = _choice;
+        if (widget.onChanged != null) { // if without null check first, check animation does not work...
+          widget.onChanged!();
+        }
       }),
       title: Text(widget.options[i]),
     );

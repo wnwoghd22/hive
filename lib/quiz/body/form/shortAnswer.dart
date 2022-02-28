@@ -16,7 +16,8 @@ class ShortAnswerForm extends QuizForm {
     required String description,
     required this.answer,
     required this.inputType,
-  }) : super(key: key, description: description);
+    Function? onChanged
+  }) : super(key: key, description: description, onChanged: onChanged);
 
   @override
   _ShortAnswerFormState createState() => _ShortAnswerFormState();
@@ -37,6 +38,9 @@ class _ShortAnswerFormState extends QuizFormState<ShortAnswerForm> {
       keyboardType: widget.inputType,
       onChanged: (value) {
         widget.input = value;
+        if (widget.onChanged != null) {
+          widget.onChanged!();
+        }
       },
     );
   }

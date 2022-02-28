@@ -18,8 +18,9 @@ class MultiChoiceForm extends QuizForm {
     required String description,
     required this.answer,
     required this.length,
-    required this.options
-  }) : super(key: key, description: description) {
+    required this.options,
+    Function? onChanged
+  }) : super(key: key, description: description, onChanged: onChanged) {
     int i = length;
 
     while (i-- > 0) {
@@ -52,6 +53,9 @@ class _MultiChoiceFormState extends QuizFormState<MultiChoiceForm> {
       value: widget.checked[i],
       onChanged: (bool? val) => setState(() {
         widget.checked[i] = val!;
+        if (widget.onChanged != null) {
+          widget.onChanged!();
+        }
       }),
       title: Text(widget.options[i]),
     );
