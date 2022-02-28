@@ -33,6 +33,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     compileSdkVersion flutter.compileSdkVersion
+    ndkVersion rootProject.ext.ndk_version
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -70,6 +71,10 @@ android {
 
             minifyEnabled true
             useProguard true
+
+            ndk {
+                debugSymbolLevel 'SYMBOL_TABLE'
+            }
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
