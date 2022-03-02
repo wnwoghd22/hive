@@ -15,21 +15,26 @@ class _TopPageState extends State<TopPage> {
   late Widget _page1;
   late Widget _page2;
   late Widget _page3;
-  late Widget _page4;
-  late Widget _page5;
-  late Widget _page6;
   late int _currentIndex;
   late Widget _currentPage;
-
   late int _course;
-  late List<Widget> _coursePages;
-  late Widget _course1;
-  late Widget _course2;
-  late Widget _currentCoursePage;
+  late Widget _bottomBar1;
+  late Widget _bottomBar2;
+  late List<Widget> _bottomBars;
+  late Widget _bottomBar;
   late List<DropdownMenuItem<int>> _courseItems;
 
-  Widget _buildNormalBottomBar() {
-    return BottomNavigationBar(
+  @override
+  void initState() {
+    super.initState();
+    _page1 = const QuizTab();
+    _page2 = const ExamTab();
+    _page3 = const DictTab();
+    _pages = [ _page1, _page2, _page3 ];
+    _currentIndex = 0;
+    _currentPage = _page1;
+    _course = 0;
+    _bottomBar1 = BottomNavigationBar(
         onTap: (index) {
           _changeTab(index);
         },
@@ -49,9 +54,7 @@ class _TopPageState extends State<TopPage> {
           ),
         ]
     );
-  }
-  Widget _buildAdvancedBottomBar() {
-    return BottomNavigationBar(
+    _bottomBar2 = BottomNavigationBar(
         onTap: (index) {
           _changeTab(index);
         },
@@ -71,18 +74,7 @@ class _TopPageState extends State<TopPage> {
           ),
         ]
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _page1 = const QuizTab();
-    _page2 = const ExamTab();
-    _page3 = const DictTab();
-    _pages = [ _page1, _page2, _page3 ];
-    _currentIndex = 0;
-    _currentPage = _page1;
-    _course = 0;
+    _bottomBars = [ _bottomBar1, _bottomBar2 ];
 
     List<String> courseList = ['조종자', '지도조종자' ];
     _courseItems = [];
@@ -95,16 +87,7 @@ class _TopPageState extends State<TopPage> {
       );
     }
 
-    _course1 = Scaffold(
-      body: _currentPage,
-      bottomNavigationBar: _buildNormalBottomBar()
-    );
-    _course2 = Scaffold(
-      body: _currentPage,
-      bottomNavigationBar: _buildAdvancedBottomBar()
-    );
-    _coursePages = [ _course1, _course2 ];
-    _currentCoursePage = _coursePages[0];
+    _bottomBar = _bottomBars[0];
   }
 
   void _changeTab(int index) {
@@ -116,7 +99,7 @@ class _TopPageState extends State<TopPage> {
 
   void _selectCourse(int value) {
     setState(() {
-      
+      _bottomBar = _bottomBars[value];
     });
   }
 
@@ -138,7 +121,8 @@ class _TopPageState extends State<TopPage> {
               })
           ]
       ),
-        body: _currentCoursePage
+        body: _currentPage,
+        bottomNavigationBar: _bottomBar
       )
     );
   }
