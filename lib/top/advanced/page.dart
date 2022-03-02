@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/components/sidebar.dart';
 import 'package:hive/top/advanced/tabs/examTab.dart';
 import 'package:hive/top/advanced/tabs/part1.dart';
 import 'package:hive/top/advanced/tabs/part2.dart';
@@ -75,7 +76,8 @@ class _AdvancedPageState extends State<AdvancedPage> {
                       label: '기출문제'
                   ),
                 ]
-            )
+            ),
+          drawer: const Sidebar(),
         )
     );
   }

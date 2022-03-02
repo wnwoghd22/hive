@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/components/sidebar.dart';
 import 'package:hive/top/normal/tabs/dictTab.dart';
 import 'package:hive/top/normal/tabs/examTab.dart';
 import 'package:hive/top/normal/tabs/quizTab.dart';
@@ -78,7 +79,8 @@ class _NormalPageState extends State<NormalPage> {
               label: '구술평가'
             ),
           ]
-        )
+        ),
+        drawer: const Sidebar(),
       )
     );
   }
