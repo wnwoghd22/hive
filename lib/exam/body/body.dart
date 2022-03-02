@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/exam/data/data.dart';
 import 'package:hive/quiz/body/form/choice.dart';
 import 'package:hive/quiz/body/form/interface/form.dart';
 import 'package:hive/quiz/body/form/multiChoice.dart';
@@ -77,23 +78,14 @@ class _ExamBodyState extends State<ExamBody> {
   void initState() {
     super.initState();
 
-    widget.numOfQuestions = QuizData.data[widget.chapter].length;
-    for (Quiz q in QuizData.data[widget.chapter]) {
+    widget.numOfQuestions = ExamData.data[widget.chapter].length;
+    for (Quiz q in ExamData.data[widget.chapter]) {
       quizList.add(q);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // return PageView.builder(
-    //   controller: PageController(initialPage: 0),
-    //   itemCount: quizList.length,
-    //   itemBuilder: (BuildContext context, int index) {
-    //     quizWidgets.add(buildQuizForm(quizList[index], index));
-    //     return quizWidgets[index];
-    //   }
-    // );
-
     int index = 0;
     quizWidgets = [
       for (Quiz q in quizList)

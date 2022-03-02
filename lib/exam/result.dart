@@ -20,8 +20,25 @@ class ResultPage extends StatelessWidget {
         ),
         body: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(score.toString() + "/" + numOfQuestions.toString()),
+              RichText(
+                text: TextSpan(
+                  text: score.toString(),
+                  style: const TextStyle(
+                    fontSize: 40
+                  ),
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "/" + numOfQuestions.toString(),
+                      style: const TextStyle(
+                        fontSize: 24
+                      ),
+                    )
+                  ]
+                ),
+              ),
               wideButton('뒤로', () => Navigator.pop(context))
             ]
           )
