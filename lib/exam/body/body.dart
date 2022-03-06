@@ -86,7 +86,7 @@ class _ExamBodyState extends State<ExamBody> {
 
   @override
   Widget build(BuildContext context) {
-    int index = 0;
+    int index = 1;
     quizWidgets = [
       for (Quiz q in quizList)
         buildQuizForm(q, index++)

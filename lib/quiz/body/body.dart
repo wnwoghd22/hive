@@ -103,17 +103,17 @@ class _QuizBodyState extends State<QuizBody> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text((_currentNum + 1).toString() + '/' + _maxNum.toString()),
-            _resultText,
-            //TODO: using PageView instead
-            _quizForm,
-            _checkButton
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text((_currentNum + 1).toString() + '/' + _maxNum.toString()),
+          _resultText,
+          //TODO: using PageView instead
+          Center(
+              child: _quizForm
+          ),
+          _checkButton
+        ],
       ),
     );
   }
