@@ -33,15 +33,27 @@ class _ShortAnswerFormState extends QuizFormState<ShortAnswerForm> {
 
   @override
   Widget buildInput() {
-    return TextField(
-      controller: _controller,
-      keyboardType: widget.inputType,
-      onChanged: (value) {
-        widget.input = value;
-        if (widget.onChanged != null) {
-          widget.onChanged!();
-        }
-      },
+    return Container(
+            margin: const EdgeInsets.all(5),
+            child: FractionallySizedBox(
+              widthFactor: 0.7,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                 child: TextField(
+               controller: _controller,
+               keyboardType: widget.inputType,
+               onChanged: (value) {
+                 widget.input = value;
+                 if (widget.onChanged != null) {
+                   widget.onChanged!();
+               }
+             },
+           )
+         )
+      ),
     );
   }
 }

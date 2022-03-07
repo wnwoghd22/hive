@@ -43,7 +43,19 @@ class _MultiChoiceFormState extends QuizFormState<MultiChoiceForm> {
     return Column(
       children: <Widget>[
         for (int i = 0; i < widget.length; ++i)
-          choiceCheckTile(i)
+          Container(
+            margin: const EdgeInsets.all(5),
+            child: FractionallySizedBox(
+              widthFactor: 0.7,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: choiceCheckTile(i)
+              )
+            ),
+          )
       ],
     );
   }

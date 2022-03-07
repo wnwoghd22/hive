@@ -41,7 +41,19 @@ class _OXFormState extends QuizFormState<OXForm> {
     return Column(
       children: <Widget>[
         for (int i = 0; i < 2; ++i)
-          choiceRadioTile(i)
+          Container(
+            margin: const EdgeInsets.all(5),
+            child: FractionallySizedBox(
+              widthFactor: 0.7,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: choiceRadioTile(i)
+              )
+            ),
+          )
       ],
     );
   }
