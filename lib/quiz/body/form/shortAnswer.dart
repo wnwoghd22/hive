@@ -5,9 +5,12 @@ class ShortAnswerForm extends QuizForm {
   String input = '';
   final String answer;
   final TextInputType inputType;
+  Function _checkEffect = () {};
 
   @override
   bool check() {
+    _checkEffect();
+
     return answer.compareTo(input) == 0;
   }
 
@@ -25,10 +28,17 @@ class ShortAnswerForm extends QuizForm {
 
 class _ShortAnswerFormState extends QuizFormState<ShortAnswerForm> {
   final TextEditingController _controller = TextEditingController();
+  int _answerState = -1;
 
   @override
   void initState() {
     super.initState();
+
+    widget._checkEffect = () {
+      setState(() {
+        _answerState = widget.answer.compareTo(widget.input) == 0 ? 0 : 1;
+      });
+    };
   }
 
   @override
@@ -48,6 +58,9 @@ class _ShortAnswerFormState extends QuizFormState<ShortAnswerForm> {
               },
               decoration: InputDecoration(
                 labelText: "답을 입력하세요",
+                fillColor: _answerState == -1 ? Colors.white :
+                  _answerState == 0 ? Colors.lightBlueAccent :
+                  Colors.redAccent,
                 border: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.blueGrey, width: 1.0),
                   borderRadius: BorderRadius.circular(25.0),
