@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 abstract class IQuiz {
   bool check();
@@ -27,11 +28,26 @@ abstract class QuizFormState<T extends QuizForm> extends State<T> with Automatic
       child: Column(
         children: [
           const SizedBox(height: 32),
-          Text(
-            widget.description,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold
-            )
+          FractionallySizedBox(
+            widthFactor: 0.7,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 3,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.all(30),
+              child: Center(
+                child: Text(
+                  widget.description,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold
+                  )
+                ),
+              ),
+            ),
           ),
           buildInput()
         ],

@@ -37,22 +37,27 @@ class _ShortAnswerFormState extends QuizFormState<ShortAnswerForm> {
             margin: const EdgeInsets.all(5),
             child: FractionallySizedBox(
               widthFactor: 0.7,
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
+              child: TextField(
+              controller: _controller,
+              keyboardType: widget.inputType,
+              onChanged: (value) {
+                widget.input = value;
+                if (widget.onChanged != null) {
+                  widget.onChanged!();
+                }
+              },
+              decoration: InputDecoration(
+                labelText: "답을 입력하세요",
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blueGrey, width: 1.0),
+                  borderRadius: BorderRadius.circular(25.0),
                 ),
-                 child: TextField(
-               controller: _controller,
-               keyboardType: widget.inputType,
-               onChanged: (value) {
-                 widget.input = value;
-                 if (widget.onChanged != null) {
-                   widget.onChanged!();
-               }
-             },
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+              ),
            )
-         )
       ),
     );
   }
