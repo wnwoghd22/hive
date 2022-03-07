@@ -5,9 +5,12 @@ class OXForm extends QuizForm {
   int checkValue = -1;
   final bool answer;
   final List<String> options = [ 'O', 'X' ];
+  Function _checkEffect = () {};
 
   @override
   bool check() {
+    _checkEffect();
+
     if (checkValue == -1) {
       return false;
     }
@@ -30,31 +33,70 @@ class OXForm extends QuizForm {
 
 class _OXFormState extends QuizFormState<OXForm> {
   int _choice = -1;
+  final List<Container> _tiles = [];
+  final List<int> _tileState = [];
 
   @override
   void initState() {
     super.initState();
+
+    for (int i = 0; i < 2; ++i) {
+      _tileState.add(-1);
+    }
+
+    widget._checkEffect = () {
+      int _answer = widget.answer ? 0 : 1;
+
+      for (int i = 0; i < _tiles.length; ++i) {
+        if (i == _choice && i == _answer) {
+          setState(() {
+            _tileState[i] = 0; // correct answer
+          });
+          continue;
+        }
+        if (i == _answer) {
+          setState(() {
+            _tileState[i] = 1; // answer
+          });
+          continue;
+        }
+        if (i == _choice) {
+          setState(() {
+            _tileState[i] = 2; // wrong
+          });
+        }
+      }
+    };
   }
 
   @override
   Widget buildInput() {
-    return Column(
-      children: <Widget>[
-        for (int i = 0; i < 2; ++i)
-          Container(
-            margin: const EdgeInsets.all(5),
-            child: FractionallySizedBox(
-              widthFactor: 0.7,
-              child: Container(
+    _tiles.clear();
+
+    for (int i = 0; i < 2; ++i) {
+      _tiles.add(Container(
+        margin: const EdgeInsets.all(5),
+        child: FractionallySizedBox(
+            widthFactor: 0.7,
+            child: Container(
                 decoration: BoxDecoration(
+                  color: _tileState[i] == -1 ? Colors.white :
+                  _tileState[i] == 0 ? Colors.lightBlueAccent :
+                  _tileState[i] == 1 ? Colors.greenAccent :
+                  Colors.redAccent,
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: choiceRadioTile(i)
-              )
-            ),
-          )
-      ],
+            )
+        ),
+      ));
+    }
+
+    return Column(
+      children:
+      _tiles
+      ,
     );
   }
 
