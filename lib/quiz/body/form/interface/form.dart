@@ -29,7 +29,7 @@ abstract class QuizFormState<T extends QuizForm> extends State<T> with Automatic
         children: [
           const SizedBox(height: 32),
           FractionallySizedBox(
-            widthFactor: 0.7,
+            widthFactor: 0.8,
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(
@@ -39,6 +39,7 @@ abstract class QuizFormState<T extends QuizForm> extends State<T> with Automatic
                 borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.all(30),
+              margin: const EdgeInsets.only(bottom: 10),
               child: Center(
                 child: Text(
                   widget.description,

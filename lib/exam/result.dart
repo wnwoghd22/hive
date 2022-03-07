@@ -27,7 +27,8 @@ class ResultPage extends StatelessWidget {
                 text: TextSpan(
                   text: score.toString(),
                   style: const TextStyle(
-                    fontSize: 40
+                    fontSize: 40,
+                    color: Colors.black
                   ),
                   children: <TextSpan>[
                     TextSpan(
