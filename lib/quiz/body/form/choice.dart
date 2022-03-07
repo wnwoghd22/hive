@@ -30,16 +30,35 @@ class ChoiceForm extends QuizForm {
 
 class _ChoiceFormState extends QuizFormState<ChoiceForm> {
   int _choice = -1;
-  List<Widget> _tiles = [];
+  final List<Container> _tiles = [];
+  final List<int> _tileState = [];
 
   @override
   void initState() {
     super.initState();
 
+    for (int i = 0; i < widget.length; ++i) {
+      _tileState.add(-1);
+    }
+
     widget._checkEffect = () {
       for (int i = 0; i < _tiles.length; ++i) {
-        if (i == widget.answer) {
-          
+        if (i == _choice && i + 1 == widget.answer) {
+          setState(() {
+            _tileState[i] = 0; // correct answer
+          });
+          continue;
+        }
+        if (i + 1 == widget.answer) {
+          setState(() {
+            _tileState[i] = 1; // answer
+          });
+          continue;
+        }
+        if (i == _choice) {
+          setState(() {
+            _tileState[i] = 2; // wrong
+          });
         }
       }
     };
@@ -56,6 +75,10 @@ class _ChoiceFormState extends QuizFormState<ChoiceForm> {
             widthFactor: 0.7,
             child: Container(
                 decoration: BoxDecoration(
+                  color: _tileState[i] == -1 ? Colors.white :
+                      _tileState[i] == 0 ? Colors.lightBlueAccent :
+                      _tileState[i] == 1 ? Colors.greenAccent :
+                          Colors.redAccent,
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(10),
                 ),
