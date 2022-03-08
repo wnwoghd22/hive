@@ -26,8 +26,7 @@ class _QuizBodyState extends State<QuizBody> {
   late int _correctAnswers = 0;
 
   late QuizForm _quizForm;
-  
-  late Widget _resultText;
+
   late Widget _checkButton;
 
   final List<Quiz> quizList = [];
@@ -68,7 +67,7 @@ class _QuizBodyState extends State<QuizBody> {
 
   void check() {
     setState(() {
-      _resultText = _quizForm.check() ? Text('O') : Text('X');
+      _correctAnswers += _quizForm.check() ? 1 : 0;
       if (_currentNum + 1 == quizList.length)
         _checkButton = Text('모두 풀었습니다.');
       else
@@ -80,7 +79,6 @@ class _QuizBodyState extends State<QuizBody> {
     setState(() {
       _currentNum++;
       setQuizForm(quizList[_currentNum]);
-      _resultText = Text('선택하세요');
       _checkButton = wideButton('확인', check);
     });
   }
@@ -94,8 +92,6 @@ class _QuizBodyState extends State<QuizBody> {
     }
 
     setQuizForm(quizList[_currentNum]);
-    
-    _resultText = Text('선택하세요');
 
     _checkButton = wideButton('확인', check);
   }
@@ -107,7 +103,6 @@ class _QuizBodyState extends State<QuizBody> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text((_currentNum + 1).toString() + '/' + _maxNum.toString()),
-          _resultText,
           //TODO: using PageView instead
           Center(
               child: _quizForm

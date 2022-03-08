@@ -14,6 +14,7 @@ class ExamBody extends StatefulWidget {
 
   int score = 0;
   int numOfQuestions = 0;
+  Function submit = (() {});
 
   ExamBody({
     Key? key,
@@ -28,7 +29,7 @@ class _ExamBodyState extends State<ExamBody> {
   final List<Quiz> quizList = [];
   List<QuizForm> quizWidgets = [];
 
-  void onChanged() {
+  void submit() {
     int score = 0;
 
     for (QuizForm q in quizWidgets) {
@@ -48,7 +49,6 @@ class _ExamBodyState extends State<ExamBody> {
           answer: q.answer,
           length: q.length,
           options: q.options,
-          onChanged: onChanged
         );
       case QuizType.multiChoice:
         return MultiChoiceForm(
@@ -56,20 +56,17 @@ class _ExamBodyState extends State<ExamBody> {
             answer: q.answer,
             length: q.length,
             options: q.options,
-            onChanged: onChanged
         );
       case QuizType.ox:
         return OXForm(
             description: index.toString() + '. ' +  (q as QuizOX).description,
             answer: q.answer,
-            onChanged: onChanged
         );
       case QuizType.shortAnswer:
         return ShortAnswerForm(
             description: index.toString() + '. ' + (q as QuizShort).description,
             answer: q.answer,
             inputType: q.inputType,
-            onChanged: onChanged
         );
     }
   }
@@ -78,6 +75,7 @@ class _ExamBodyState extends State<ExamBody> {
   void initState() {
     super.initState();
 
+    widget.submit = submit;
     widget.numOfQuestions = ExamData.data[widget.chapter].length;
     for (Quiz q in ExamData.data[widget.chapter]) {
       quizList.add(q);

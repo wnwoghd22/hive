@@ -58,6 +58,7 @@ class _ShortAnswerFormState extends QuizFormState<ShortAnswerForm> {
               },
               decoration: InputDecoration(
                 labelText: "답을 입력하세요",
+                filled: true,
                 fillColor: _answerState == -1 ? Colors.white :
                   _answerState == 0 ? Colors.lightBlueAccent :
                   Colors.redAccent,

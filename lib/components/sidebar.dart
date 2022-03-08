@@ -2,21 +2,33 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({Key? key}) : super(key: key);
+
+  launchBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url, forceSafariVC: false, forceWebView: false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: [
-          Link(
-            uri: Uri.parse('https://drone.onestop.go.kr/'),
-            builder: (context, onPressed) => ElevatedButton(
-              onPressed: onPressed,
-              child: const Text('원스톱 서비스')
-            )
+          Container(
+            margin: const EdgeInsets.all(20),
+            child: const Text('Hive'),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: ElevatedButton(
+                onPressed: () => {
+                  launchBrowser('https://drone.onestop.go.kr/')
+                },
+                child: const Text('원스톱 서비스')),
           )
         ],
       )
