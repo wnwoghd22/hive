@@ -3,17 +3,5 @@
     <!-- Flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->
-	
-
-    // TODO: check if this activity tag works well
-    <activity android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-           android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-           android:exported="false"/>
-
     <uses-permission android:name="android.permission.INTERNET"/>
-
-  
-   // TODO: check if this permission tag is necessary
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
-
 </manifest>

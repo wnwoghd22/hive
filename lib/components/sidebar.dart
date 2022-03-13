@@ -21,7 +21,7 @@ class Sidebar extends StatelessWidget {
                 onPressed: () => {
                   launchBrowser(url)
                 },
-                child: const Text(text)),
+                child: Text(text)),
           );
   }
 

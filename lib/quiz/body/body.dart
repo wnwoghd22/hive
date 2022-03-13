@@ -102,8 +102,8 @@ class _QuizBodyState extends State<QuizBody> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
 
-        // mainAxisAlignment: MainAxisAlignment.end,  // Does it work?
-        // mainAxisSize: MainAxisSize.max,  
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,  // Does it work?
+        mainAxisSize: MainAxisSize.max,
 
         children: [
           Text((_currentNum + 1).toString() + '/' + _maxNum.toString()),
@@ -111,6 +111,7 @@ class _QuizBodyState extends State<QuizBody> {
           Center(
               child: _quizForm
           ),
+	        const Spacer(),
 	  // TODO: make checkButton stick to bottom
           _checkButton
         ],

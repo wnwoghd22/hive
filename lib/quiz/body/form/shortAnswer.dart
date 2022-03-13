@@ -46,7 +46,7 @@ class _ShortAnswerFormState extends QuizFormState<ShortAnswerForm> {
     return Container(
             margin: const EdgeInsets.all(5),
             child: FractionallySizedBox(
-              widthFactor: 0.7,
+              widthFactor: 0.85,
               child: TextField(
               controller: _controller,
               keyboardType: widget.inputType,

@@ -77,7 +77,7 @@ class _OXFormState extends QuizFormState<OXForm> {
       _tiles.add(Container(
         margin: const EdgeInsets.all(5),
         child: FractionallySizedBox(
-            widthFactor: 0.7,
+            widthFactor: 0.85,
             child: Container(
                 decoration: BoxDecoration(
                   color: _tileState[i] == -1 ? Colors.white :
