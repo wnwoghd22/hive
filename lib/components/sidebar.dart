@@ -13,6 +13,18 @@ class Sidebar extends StatelessWidget {
     }
   }
 
+  Widget linkButton(String url, String text) {
+    return Container(
+            margin: const EdgeInsets.all(10),
+            child: ElevatedButton(
+		// TODO: need to make link well-functioning on mobile device... probably need to write codes in .XML file
+                onPressed: () => {
+                  launchBrowser(url)
+                },
+                child: const Text(text)),
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -30,7 +42,8 @@ class Sidebar extends StatelessWidget {
                   launchBrowser('https://drone.onestop.go.kr/')
                 },
                 child: const Text('원스톱 서비스')),
-          )
+          ),
+          linkButton('https://www.kotsa.or.kr/main.do', 'TS교통안전공단'),
         ],
       )
     );
