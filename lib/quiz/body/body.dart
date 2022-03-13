@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:hive/quiz/body/form/choice.dart';
 import 'package:hive/quiz/body/form/interface/form.dart';
 import 'package:hive/quiz/body/form/multiChoice.dart';
@@ -101,12 +101,17 @@ class _QuizBodyState extends State<QuizBody> {
     return Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+
+        // mainAxisAlignment: MainAxisAlignment.end,  // Does it work?
+        // mainAxisSize: MainAxisSize.max,  
+
         children: [
           Text((_currentNum + 1).toString() + '/' + _maxNum.toString()),
           //TODO: using PageView instead
           Center(
               child: _quizForm
           ),
+	  // TODO: make checkButton stick to bottom
           _checkButton
         ],
       ),

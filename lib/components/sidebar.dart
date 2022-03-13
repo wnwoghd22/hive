@@ -1,4 +1,4 @@
-import 'dart:io';
+﻿import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/link.dart';
@@ -25,6 +25,7 @@ class Sidebar extends StatelessWidget {
           Container(
             margin: const EdgeInsets.all(10),
             child: ElevatedButton(
+		// TODO: need to make link well-functioning on mobile device... probably need to write codes in .XML file
                 onPressed: () => {
                   launchBrowser('https://drone.onestop.go.kr/')
                 },

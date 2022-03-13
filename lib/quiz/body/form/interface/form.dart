@@ -50,7 +50,10 @@ abstract class QuizFormState<T extends QuizForm> extends State<T> with Automatic
               ),
             ),
           ),
-          buildInput()
+          buildInput(),
+
+          // TODO: implement solution
+          // Text(sol),
         ],
       ),
     );
