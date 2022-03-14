@@ -21,6 +21,7 @@ class QuizBody extends StatefulWidget {
 }
 
 class _QuizBodyState extends State<QuizBody> {
+  // TODO: get actual num of q
   final int _maxNum = 20;
   late int _currentNum = 0;
   late int _correctAnswers = 0;
