@@ -21,8 +21,7 @@ class QuizBody extends StatefulWidget {
 }
 
 class _QuizBodyState extends State<QuizBody> {
-  // TODO: get actual num of q
-  final int _maxNum = 20;
+  late int _maxNum;
   late int _currentNum = 0;
   late int _correctAnswers = 0;
 
@@ -69,10 +68,14 @@ class _QuizBodyState extends State<QuizBody> {
   void check() {
     setState(() {
       _correctAnswers += _quizForm.check() ? 1 : 0;
-      if (_currentNum + 1 == quizList.length)
-        _checkButton = Text('모두 풀었습니다.');
-      else
+      if (_currentNum + 1 == quizList.length) {
+        _checkButton = Container(
+          margin: const EdgeInsets.all(20),
+          child: const Text('모두 풀었습니다.'),
+        );
+      } else {
         _checkButton = wideButton('다음 문제', nextQuestion);
+      }
     });
   }
 
@@ -87,6 +90,8 @@ class _QuizBodyState extends State<QuizBody> {
   @override
   void initState() {
     super.initState();
+
+    _maxNum = QuizData.data[widget.chapter].length;
 
     for (Quiz q in QuizData.data[widget.chapter]) {
       quizList.add(q);
